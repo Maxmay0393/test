@@ -378,6 +378,7 @@ class Mage_Core_Model_Email_Template extends Mage_Core_Model_Email_Template_Abst
         $emails = array_values((array)$email);
         $names = is_array($name) ? $name : (array)$name;
         $names = array_values($names);
+
         foreach ($emails as $key => $email) {
             if (!isset($names[$key])) {
                 $names[$key] = substr($email, 0, strpos($email, '@'));
@@ -390,6 +391,7 @@ class Mage_Core_Model_Email_Template extends Mage_Core_Model_Email_Template_Abst
         $this->setUseAbsoluteLinks(true);
         $text = $this->getProcessedTemplate($variables, true);
         $subject = $this->getProcessedTemplateSubject($variables);
+
 
         $setReturnPath = Mage::getStoreConfig(self::XML_PATH_SENDING_SET_RETURN_PATH);
         switch ($setReturnPath) {
@@ -481,6 +483,7 @@ class Mage_Core_Model_Email_Template extends Mage_Core_Model_Email_Template_Abst
             $storeId = $this->getDesignConfig()->getStore();
         }
 
+
         if (is_numeric($templateId)) {
             $queue = $this->getQueue();
             $this->load($templateId);
@@ -505,6 +508,8 @@ class Mage_Core_Model_Email_Template extends Mage_Core_Model_Email_Template_Abst
         if (!isset($vars['store'])) {
             $vars['store'] = Mage::app()->getStore($storeId);
         }
+
+
         $this->setSentSuccess($this->send($email, $name, $vars));
         return $this;
     }

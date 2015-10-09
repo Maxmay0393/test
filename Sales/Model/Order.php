@@ -1304,6 +1304,7 @@ class Mage_Sales_Model_Order extends Mage_Sales_Model_Abstract
         $appEmulation->stopEnvironmentEmulation($initialEnvironmentInfo);
 
         // Retrieve corresponding email template id and customer name
+
         if ($this->getCustomerIsGuest()) {
             $templateId = Mage::getStoreConfig(self::XML_PATH_EMAIL_GUEST_TEMPLATE, $storeId);
             $customerName = $this->getBillingAddress()->getName();
@@ -1351,8 +1352,8 @@ class Mage_Sales_Model_Order extends Mage_Sales_Model_Abstract
             ->setEventType(self::EMAIL_EVENT_NAME_NEW_ORDER)
             ->setIsForceCheck(!$forceMode);
 
-        $mailer->setQueue($emailQueue)->send();
-
+//        $mailer->setQueue($emailQueue)->send();
+        $mailer->send();
         $this->setEmailSent(true);
         $this->_getResource()->saveAttribute($this, 'email_sent');
 

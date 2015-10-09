@@ -794,7 +794,6 @@ class Mage_Checkout_Model_Type_Onepage
         $this->_checkoutSession->setLastQuoteId($this->getQuote()->getId())
             ->setLastSuccessQuoteId($this->getQuote()->getId())
             ->clearHelperData();
-
         $order = $service->getOrder();
         if ($order) {
             Mage::dispatchEvent('checkout_type_onepage_save_order_after',
@@ -811,6 +810,7 @@ class Mage_Checkout_Model_Type_Onepage
             if (!$redirectUrl && $order->getCanSendNewEmailFlag()) {
                 try {
                     $order->queueNewOrderEmail();
+
                 } catch (Exception $e) {
                     Mage::logException($e);
                 }
